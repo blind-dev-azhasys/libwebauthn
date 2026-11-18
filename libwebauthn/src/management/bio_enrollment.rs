@@ -385,6 +385,7 @@ mod test {
         channel.push_command_pair(req, resp);
     }
 
+    // r[verify REQ-AUTHENTICATOR-ADMIN]
     #[tokio::test]
     async fn start_new_bio_enrollment_returns_raw_template_id() {
         let template = [0x1D_u8; 16];

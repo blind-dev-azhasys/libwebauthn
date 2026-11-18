@@ -74,6 +74,7 @@ impl fmt::Debug for PersistentTokenRecord {
 ///
 /// All methods are infallible by design: a failed read behaves as a cache miss and the
 /// flow falls back to a normal PIN/UV ceremony, and a failed write is best-effort.
+// r[impl REQ-PERSISTENT-CREDENTIAL-MANAGEMENT]
 #[async_trait]
 pub trait PersistentTokenStore: fmt::Debug + Send + Sync {
     /// Returns every stored record. Recognition trial-decrypts `encIdentifier` against
@@ -296,6 +297,7 @@ mod test {
         }
     }
 
+    // r[verify REQ-PERSISTENT-CREDENTIAL-MANAGEMENT]
     #[tokio::test]
     async fn put_list_delete_round_trip() {
         let store = MemoryPersistentTokenStore::new();

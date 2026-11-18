@@ -87,6 +87,7 @@ fn push_absent(out: &mut Vec<Ctap2Transport>, ts: &[Ctap2Transport]) {
 /// The result is advisory ordering, never an eligibility filter, and it is partial: a transport the
 /// site did not mention is simply absent, and a caller should rank it last rather than exclude it.
 /// Empty input means no preference.
+// r[impl REQ-TRANSPORT-HINTS]
 fn merge_transport_preference(
     hints: &[PublicKeyCredentialHint],
     attachment: Option<AuthenticatorAttachment>,
@@ -162,6 +163,7 @@ impl TransportHintedRequest for MakeCredentialRequest {
     }
 }
 
+// r[verify REQ-TRANSPORT-HINTS]
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -72,6 +72,7 @@ pub(crate) fn get_hidapi() -> Result<HidApi, HidError> {
     HidApi::new().map_err(HidError::ApiInit)
 }
 
+// r[impl REQ-HID-TRANSPORT]
 #[instrument(level = Level::DEBUG, skip_all)]
 pub async fn list_devices() -> Result<Vec<HidDevice>, HidError> {
     let devices: Vec<_> = get_hidapi()?

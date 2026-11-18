@@ -25,6 +25,8 @@ async fn handle_updates(mut state_recv: Receiver<UvUpdate>) {
     assert_eq!(state_recv.recv().await, Ok(UvUpdate::PresenceRequired));
 }
 
+// r[verify REQ-WEBAUTHN-CEREMONIES]
+// r[verify REQ-HID-TRANSPORT]
 #[test(tokio::test)]
 async fn test_webauthn_basic_ctap2() {
     let mut device = get_virtual_device();

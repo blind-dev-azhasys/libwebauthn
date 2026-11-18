@@ -18,6 +18,7 @@ use crate::proto::ctap1::Ctap1;
 use crate::transport::Channel;
 use crate::webauthn::error::{PlatformError, WebAuthnError};
 
+// r[impl REQ-U2F-CEREMONIES]
 #[async_trait]
 pub trait U2F: Channel {
     async fn u2f_negotiate_protocol(

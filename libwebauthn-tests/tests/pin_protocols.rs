@@ -18,6 +18,7 @@ async fn handle_updates(mut state_recv: Receiver<UvUpdate>) {
     p.send_pin("1234").expect("Failed to send first PIN");
 }
 
+// r[verify REQ-PIN-UV]
 #[test(tokio::test)]
 async fn test_webauthn_change_pin_once() {
     let protos = [Ctap2PinUvAuthProtocol::One, Ctap2PinUvAuthProtocol::Two];

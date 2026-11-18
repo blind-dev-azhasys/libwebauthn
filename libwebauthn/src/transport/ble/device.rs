@@ -21,6 +21,7 @@ pub async fn is_available() -> bool {
     btleplug::is_available().await
 }
 
+// r[impl REQ-BLE-TRANSPORT]
 #[instrument(level = Level::DEBUG, skip_all)]
 pub async fn list_devices() -> Result<Vec<BleDevice>, BleError> {
     let devices: Vec<_> = btleplug::list_fido_devices()

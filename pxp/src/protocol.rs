@@ -791,6 +791,7 @@ mod tests {
         }
     }
 
+    // r[verify REQ-HYBRID-PXP]
     #[tokio::test]
     async fn invalid_signature_does_not_evict() {
         let client_private_key = NonZeroScalar::random(&mut OsRng);

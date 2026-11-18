@@ -185,6 +185,7 @@ impl BleFrameParser {
     }
 }
 
+// r[verify REQ-BLE-TRANSPORT]
 #[cfg(test)]
 mod tests {
     use crate::transport::ble::framing::{

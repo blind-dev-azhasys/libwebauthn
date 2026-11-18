@@ -148,6 +148,7 @@ impl Drop for TunnelHandle {
 
 /// Spawns the connection task for `target`. Progress is reported to `updates`;
 /// CTAP frames are exchanged through the returned handle once connected.
+// r[impl REQ-HYBRID-PXP]
 pub fn connect(target: impl Into<ConnectTarget>, updates: impl UpdateSink) -> TunnelHandle {
     let target = target.into();
     let (ctap_tx_send, ctap_tx_recv) = mpsc::channel(16);

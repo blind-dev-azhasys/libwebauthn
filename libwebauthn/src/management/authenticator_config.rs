@@ -273,6 +273,7 @@ mod test {
         channel.push_command_pair(req, resp);
     }
 
+    // r[verify REQ-AUTHENTICATOR-ADMIN]
     #[tokio::test]
     async fn toggle_always_uv_rejected_when_authnr_cfg_absent() {
         let mut channel = MockChannel::new();

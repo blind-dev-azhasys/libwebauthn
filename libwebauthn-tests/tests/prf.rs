@@ -26,6 +26,7 @@ use tokio::sync::broadcast::Receiver;
 
 const TIMEOUT: Duration = Duration::from_secs(10);
 
+// r[verify REQ-PRF-EXTENSION]
 #[test(tokio::test)]
 async fn test_webauthn_prf_no_pin_set() {
     let mut device = get_virtual_device();

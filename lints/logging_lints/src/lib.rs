@@ -69,6 +69,7 @@ rustc_session::declare_tool_lint! {
     "possibly sensitive field logged at info or above"
 }
 
+// r[impl REQ-LOGGING-DIAGNOSTICS]
 rustc_session::declare_lint_pass!(LoggingLints => [
     TRACING_MESSAGE_INTERPOLATION,
     TRACING_MESSAGE_TRAILING_PUNCTUATION,
@@ -414,6 +415,7 @@ fn is_sensitive(name: &str) -> bool {
     SENSITIVE_SUBSTRINGS.iter().any(|s| norm.contains(s))
 }
 
+// r[verify REQ-LOGGING-DIAGNOSTICS]
 #[test]
 fn ui() {
     dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui");
