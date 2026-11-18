@@ -58,6 +58,7 @@ async fn drain_updates(mut state_recv: Receiver<UvUpdate>) {
     while state_recv.recv().await.is_ok() {}
 }
 
+// r[verify REQ-U2F-CEREMONIES]
 #[tokio::test]
 async fn test_webauthn_ctap1_exclude_list() {
     let mut device = get_virtual_device();

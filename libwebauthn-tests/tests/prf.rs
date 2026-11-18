@@ -672,6 +672,7 @@ async fn run_failed_test(
 /// W3C WebAuthn L3 §10.1.4: PRF salt inputs are `BufferSource`s of any length.
 /// Regression test for #209: end-to-end PRF assertion succeeds for empty,
 /// sub-32-byte, and super-32-byte salts, and is deterministic.
+// r[verify REQ-PRF-EXTENSION]
 #[test(tokio::test)]
 async fn test_webauthn_prf_variable_length_input() {
     let mut device = get_virtual_device();

@@ -402,6 +402,7 @@ mod test {
         );
     }
 
+    // r[verify REQ-PERSISTENT-CREDENTIAL-MANAGEMENT]
     #[tokio::test]
     async fn recognizes_matching_record() {
         let store = MemoryPersistentTokenStore::new();
