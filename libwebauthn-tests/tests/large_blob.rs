@@ -37,6 +37,7 @@ async fn handle_updates_n(mut state_recv: Receiver<UvUpdate>, n: usize) {
     }
 }
 
+// r[verify REQ-LARGE-BLOB-EXTENSION]
 #[test(tokio::test)]
 async fn test_webauthn_large_blob_read_returns_planted_blob() {
     let mut device = get_virtual_device();

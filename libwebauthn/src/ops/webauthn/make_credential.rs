@@ -551,6 +551,7 @@ pub enum MakeCredentialPrepareError {
 impl MakeCredentialRequest {
     /// Builds a [`MakeCredentialRequest`] from its WebAuthn IDL JSON, validating
     /// the caller origin against rp.id per `settings`.
+    // r[impl REQ-WEBAUTHN-REQUESTS]
     pub async fn prepare(
         request_origin: &RequestOrigin,
         json: &str,

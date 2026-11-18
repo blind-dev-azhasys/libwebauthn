@@ -154,6 +154,7 @@ where
     .await
 }
 
+// r[impl REQ-PIN-UV]
 #[instrument(level = Level::DEBUG, skip_all)]
 async fn user_verification_helper<R, C>(
     channel: &mut C,

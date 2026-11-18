@@ -124,6 +124,7 @@ impl<T> AuthenticatorData<T>
 where
     T: Clone + Serialize,
 {
+    // r[impl REQ-AUTHENTICATOR-DATA]
     pub fn to_response_bytes(&self) -> Result<Vec<u8>, PlatformError> {
         // Return the device's authData verbatim. Re-encoding from the parsed
         // fields would reorder or drop unmodeled extensions, invalidating the
@@ -321,6 +322,7 @@ impl<'de, T: DeserializeOwned> Deserialize<'de> for AuthenticatorData<T> {
     }
 }
 
+// r[verify REQ-AUTHENTICATOR-DATA]
 #[cfg(test)]
 mod tests {
     use serde_bytes::ByteBuf;

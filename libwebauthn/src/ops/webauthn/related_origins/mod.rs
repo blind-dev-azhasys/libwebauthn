@@ -74,6 +74,7 @@ pub trait HttpClient: Send + Sync {
 /// Supplies the set of allowed origins for an RP id (WebAuthn L3 §5.11).
 /// [`WellKnownRelatedOriginsSource`] is the default, fetching the well-known
 /// document; a caller that already holds the list may implement this directly.
+// r[impl REQ-RELATED-ORIGINS]
 #[async_trait]
 pub trait RelatedOriginsSource: Send + Sync {
     async fn allowed_origins(

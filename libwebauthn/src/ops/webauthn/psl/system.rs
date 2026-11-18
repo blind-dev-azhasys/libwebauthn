@@ -48,6 +48,7 @@ impl SystemPublicSuffixList {
     /// path is preferred because on Fedora it is the only file that ships
     /// on a default install; on distributions that ship both (Debian/Ubuntu)
     /// either choice has the same content.
+    // r[impl REQ-SYSTEM-PSL]
     pub fn auto() -> Result<Self, SystemLoadError> {
         let dafsa_path = PathBuf::from(SYSTEM_PSL_DAFSA_PATH);
         let dat_path = PathBuf::from(SYSTEM_PSL_PATH);
@@ -93,6 +94,7 @@ mod tests {
     /// Integration test against the actual system PSL. Skipped unless
     /// `LIBWEBAUTHN_PSL_SYSTEM_TEST=1` is set, because the test depends on
     /// the host machine having a PSL package installed.
+    // r[verify REQ-SYSTEM-PSL]
     #[test]
     fn system_psl_loads_and_resolves_common_suffixes() {
         if std::env::var("LIBWEBAUTHN_PSL_SYSTEM_TEST").as_deref() != Ok("1") {

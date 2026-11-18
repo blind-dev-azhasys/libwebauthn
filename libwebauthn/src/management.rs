@@ -12,6 +12,7 @@
 //! [`Channel`](crate::transport::Channel), so the same API works across every
 //! transport.
 
+// r[impl REQ-AUTHENTICATOR-ADMIN]
 mod bio_enrollment;
 pub use bio_enrollment::BioEnrollment;
 

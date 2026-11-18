@@ -111,6 +111,7 @@ async fn is_fido(device: &NfcDevice) -> bool {
     inner(device).await.is_ok()
 }
 
+// r[impl REQ-NFC-TRANSPORT]
 #[instrument(level = Level::DEBUG, skip_all)]
 /// Returns Ok(None) if no devices are found, otherwise returns
 /// the first device found by either NFC-backend.

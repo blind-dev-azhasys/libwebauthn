@@ -96,6 +96,8 @@ fn settings<'a>(
     }
 }
 
+// r[verify REQ-WEBAUTHN-REQUESTS]
+// r[verify REQ-RELATED-ORIGINS]
 #[tokio::test]
 async fn end_to_end_mock_match_via_make_credential() {
     let request_origin: RequestOrigin = "https://app.example.com".parse().unwrap();

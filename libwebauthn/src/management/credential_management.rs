@@ -22,6 +22,7 @@ use serde_bytes::ByteBuf;
 use std::time::Duration;
 use tracing::info;
 
+// r[impl REQ-CREDENTIAL-MANAGEMENT]
 #[async_trait]
 pub trait CredentialManagement: Channel {
     async fn get_credential_metadata(
@@ -372,6 +373,7 @@ mod test {
         channel.push_command_pair(req, resp);
     }
 
+    // r[verify REQ-CREDENTIAL-MANAGEMENT]
     #[tokio::test]
     async fn enumerate_rps_begin_returns_raw_rp_id_hash() {
         let hash = [0xAB_u8; 32];

@@ -100,6 +100,7 @@ fn create_credential(id: &[u8]) -> Ctap2PublicKeyCredentialDescriptor {
     }
 }
 
+// r[verify REQ-CTAP1-DOWNGRADE]
 #[test(tokio::test)]
 async fn preflight_no_exclude_list() {
     // Make credential with exclude_list: None. Should do nothing in preflight and return a credential

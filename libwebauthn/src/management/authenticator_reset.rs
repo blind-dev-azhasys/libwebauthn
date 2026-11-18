@@ -50,6 +50,7 @@ where
     }
 }
 
+// r[verify REQ-AUTHENTICATOR-ADMIN]
 #[cfg(test)]
 mod tests {
     use std::sync::Arc;

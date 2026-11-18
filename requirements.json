@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "REQ-WEBAUTHN-REQUESTS",
+      "title": "WebAuthn requests are prepared from IDL JSON with origin validation",
+      "version": 1,
+      "description": "MakeCredentialRequest and GetAssertionRequest prepare asynchronous platform requests from WebAuthn IDL JSON. Preparation decodes binary fields, applies request defaults and validates the calling origin against the relying party ID with a caller-supplied Public Suffix List, with explicit settings for validation, related origins and trusted origins.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-WEBAUTHN-CEREMONIES",
+      "title": "Channels perform CTAP2 WebAuthn credential ceremonies",
+      "version": 1,
+      "description": "The WebAuthn trait is implemented for every Channel and performs make-credential and get-assertion ceremonies over CTAP2. The ceremonies handle protocol negotiation, user presence and verification, credential lists, discoverable credentials, additional assertions and conversion of authenticator responses to WebAuthn platform responses.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-U2F-CEREMONIES",
+      "title": "Channels perform FIDO U2F registration and authentication",
+      "version": 1,
+      "description": "The U2F trait is implemented for every Channel and negotiates CTAP1 support before performing U2F registration and signing. Registration supports excluded credentials, and authentication returns the authenticator signature and authenticator data to the caller.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-CTAP1-DOWNGRADE",
+      "title": "Compatible WebAuthn ceremonies downgrade to FIDO U2F",
+      "version": 1,
+      "description": "When a channel does not support FIDO2 and a request is downgradable, make-credential and get-assertion requests are converted to CTAP1 operations and their responses are upgraded to WebAuthn responses. Exclude-list and allow-list preflight filter credentials before ceremonies, including legacy AppID exclusion checks.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-PIN-UV",
+      "title": "Ceremonies support PIN and biometric user verification",
+      "version": 1,
+      "description": "PIN/UV Auth Protocol One and Two provide key agreement, authentication and encryption. Ceremony logic obtains PIN or biometric pinUvAuthTokens with the required permissions, reports user-verification updates and retries, supports PIN setup and change, and normalizes collected PINs.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-CREDENTIAL-MANAGEMENT",
+      "title": "CTAP2 resident credentials can be inspected and managed",
+      "version": 1,
+      "description": "CredentialManagement supports credential metadata, relying-party and credential enumeration, credential deletion and user-information updates over any Channel. Requests acquire user verification, select credential-management permissions and handle both current commands and the legacy preview command.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-PERSISTENT-CREDENTIAL-MANAGEMENT",
+      "title": "Read-only credential management can reuse persistent tokens",
+      "version": 1,
+      "description": "On CTAP 2.2 authenticators that support persistent credential-management read-only permission, a persistent token store can recognize a device, reuse a matching token, mint and store a replacement, and evict stale or rejected records. Persistent token records are zeroized on drop and their debug representation redacts token material.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-AUTHENTICATOR-ADMIN",
+      "title": "CTAP2 authenticator administration is available over any Channel",
+      "version": 1,
+      "description": "BioEnrollment manages biometric templates, AuthenticatorConfig manages always-UV, enterprise attestation and PIN policy settings, and AuthenticatorReset restores factory defaults. These administration traits acquire the required PIN or biometric authorization and are implemented for every Channel.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-PRF-EXTENSION",
+      "title": "WebAuthn PRF extension is supported at credential creation and assertion",
+      "version": 1,
+      "description": "PRF requests accept variable-length inputs at credential creation and assertion. The implementation uses native CTAP PRF when advertised, falls back to hmac-secret and hmac-secret-mc where required, decrypts results with the user-verification shared secret, and upgrades user verification to required when PRF is requested.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-LARGE-BLOB-EXTENSION",
+      "title": "WebAuthn largeBlob extension supports reading, writing and deletion",
+      "version": 1,
+      "description": "Large-blob assertions can read a credential blob and write or delete an entry through chunked authenticatorLargeBlobs commands. Writes and deletion require exactly one allowCredentials entry, preserve unrelated entries, and report read, write or deletion failures through absent output or a false written flag.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-RELATED-ORIGINS",
+      "title": "Related origins can authorize a cross-site relying party ID",
+      "version": 1,
+      "description": "WebAuthn Level 3 related-origins validation resolves an RP's allowed origins through a RelatedOriginsSource and accepts a same-origin caller from that list, subject to the distinct registrable-label cap. The well-known source validates HTTPS fetch results and JSON content, while an optional reqwest feature supplies the default HTTP implementation.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-SYSTEM-PSL",
+      "title": "The system Public Suffix List is loaded in either packaged format",
+      "version": 1,
+      "description": "SystemPublicSuffixList::auto probes the standard system paths, preferring the binary DAFSA list and falling back to the text DAT list. Both implementations expose public-suffix and registrable-domain lookups for origin and relying-party validation.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-HID-TRANSPORT",
+      "title": "USB authenticators are supported over CTAP HID",
+      "version": 1,
+      "description": "The HID transport discovers FIDO usage-page devices through hidapi, opens channels and exchanges framed CTAP1 and CTAP2 messages. The virt feature exposes a virtual HID backend so the same channel implementation can be exercised end to end without physical hardware.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-BLE-TRANSPORT",
+      "title": "Bluetooth Low Energy authenticators are supported through BlueZ",
+      "version": 1,
+      "description": "The BLE transport discovers FIDO devices with btleplug and BlueZ, negotiates supported FIDO revisions, handles pairing and GATT communication, and fragments and reassembles FIDO BLE messages for U2F and WebAuthn ceremonies.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-NFC-TRANSPORT",
+      "title": "NFC authenticators are supported through opt-in PC/SC and libnfc backends",
+      "version": 1,
+      "description": "The NFC transport is compiled with the nfc-backend-pcsc or nfc-backend-libnfc feature. It discovers FIDO devices, selects the FIDO applet, exchanges CTAP1 APDUs and CTAP2 messages, and preserves authenticator status errors for ceremony handling.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-HYBRID-PXP",
+      "title": "Hybrid authenticators connect through the Proximity Exchange Protocol",
+      "version": 1,
+      "description": "The pxp crate initiates connections from QR codes or previously linked known devices, establishes physical proximity over BLE and negotiates a WebSocket tunnel or direct BLE L2CAP data channel. A Noise handshake protects encrypted CTAP frame exchange, which libwebauthn exposes as its hybrid transport.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-AUTHENTICATOR-DATA",
+      "title": "Authenticator data and credential keys retain their signed wire representation",
+      "version": 1,
+      "description": "AuthenticatorData parses relying-party hashes, flags, counters, attested credential data and extensions. Responses received from an authenticator are returned byte-for-byte, and credential public keys are retained as their original COSE CBOR so relying-party signature verification is not invalidated by re-encoding.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-CLIENT-DATA-JSON",
+      "title": "Client data is serialized as WebAuthn clientDataJSON",
+      "version": 1,
+      "description": "ClientData serializes the operation, base64url challenge, origin, crossOrigin flag and optional topOrigin in WebAuthn field order with JSON string escaping. Its hash is the SHA-256 digest of the exact serialized clientDataJSON used in ceremonies.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-TRANSPORT-HINTS",
+      "title": "Relying-party hints produce an ordered transport preference",
+      "version": 1,
+      "description": "WebAuthn hints, authenticator attachment and credential transport lists merge into a deduplicated ordered transport preference for device selection. Explicit hints take precedence, unknown values are ignored without rejecting the request, and hybrid hints suppress inappropriate platform-transport suggestions.",
+      "status": "proposed"
+    },
+    {
+      "id": "REQ-LOGGING-DIAGNOSTICS",
+      "title": "Library diagnostics follow the tracing logging policy",
+      "version": 1,
+      "description": "Library diagnostics use tracing with static messages and structured fields, reserve full sensitive values for trace level, and keep per-device identifiers below info level. Custom dylint checks enforce static messages, message punctuation and the prohibition on print and log-crate macros, and warn about sensitive-looking fields above debug level.",
+      "status": "proposed"
+    }
+  ]
+}

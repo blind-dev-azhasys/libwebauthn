@@ -107,6 +107,7 @@ pub fn command_ctap_msg(has_more: bool, payload: &[u8]) -> CtapMsgCommand<'_> {
     CtapMsgCommand::new(has_more, payload)
 }
 
+// r[verify REQ-NFC-TRANSPORT]
 #[cfg(test)]
 mod tests {
     use super::*;

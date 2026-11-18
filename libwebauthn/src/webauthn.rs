@@ -152,6 +152,10 @@ macro_rules! handle_errors {
 }
 pub(crate) use handle_errors;
 
+// r[impl REQ-WEBAUTHN-CEREMONIES]
+// r[impl REQ-CTAP1-DOWNGRADE]
+// r[impl REQ-PRF-EXTENSION]
+// r[impl REQ-LARGE-BLOB-EXTENSION]
 #[async_trait]
 pub trait WebAuthn: Channel {
     async fn webauthn_make_credential(
