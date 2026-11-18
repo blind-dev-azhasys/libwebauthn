@@ -310,6 +310,7 @@ fn ga_request(
 /// End-to-end round trip via the production write+read paths. Drives WebAuthn
 /// `largeBlob.write` → `largeBlob.read` against the virt authenticator and
 /// asserts that the read returns exactly the bytes written.
+// r[verify REQ-LARGE-BLOB-EXTENSION]
 #[test(tokio::test)]
 async fn test_webauthn_large_blob_write_then_read_returns_blob() {
     let mut device = get_virtual_device();

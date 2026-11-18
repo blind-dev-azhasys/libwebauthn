@@ -272,6 +272,17 @@ mod tests {
         );
     }
 
+    // r[verify REQ-CLIENT-DATA-JSON]
+    #[test]
+    fn hash_is_sha256_of_exact_json() {
+        let client_data = make_client_data(None);
+        let mut hasher = Sha256::new();
+        hasher.update(client_data.to_json().as_bytes());
+        let expected = hasher.finalize().to_vec();
+
+        assert_eq!(client_data.hash(), expected);
+    }
+
     /// Full round-trip: every field survives the JSON encoder unchanged.
     #[test]
     fn round_trip_preserves_all_fields() {
