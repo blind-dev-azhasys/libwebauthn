@@ -15,6 +15,17 @@ jobs:
         run: sudo apt-get update
       - name: Install system dependencies
         run: sudo apt-get install libudev-dev libdbus-1-dev libsodium-dev libnfc-dev libpcsclite-dev publicsuffix
+      - name: Verify native library development files
+        run: |
+          missing=""
+          for tool in cc pkg-config; do
+            command -v "$tool" >/dev/null || missing="$missing $tool"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Missing runner dependencies::$missing" >&2
+            exit 1
+          fi
+          pkg-config --print-errors --exists libudev dbus-1 libsodium libnfc libpcsclite
       - name: Install pinned toolchain
         # Drop the toolchain the image ships with once we have switched off it. The job builds the
         # workspace three times over, and the runner does not have the disk to spare for both.
@@ -54,6 +65,17 @@ jobs:
         run: sudo apt-get update
       - name: Install system dependencies
         run: sudo apt-get install libudev-dev libdbus-1-dev libsodium-dev libnfc-dev libpcsclite-dev publicsuffix
+      - name: Verify native library development files
+        run: |
+          missing=""
+          for tool in cc pkg-config; do
+            command -v "$tool" >/dev/null || missing="$missing $tool"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Missing runner dependencies::$missing" >&2
+            exit 1
+          fi
+          pkg-config --print-errors --exists libudev dbus-1 libsodium libnfc libpcsclite
       - name: Install declared MSRV toolchain
         run: rustup toolchain install 1.88 --profile minimal
       - name: Check against declared MSRV

@@ -23,6 +23,17 @@ jobs:
         run: sudo apt-get update
       - name: Install system dependencies
         run: sudo apt-get install libudev-dev libdbus-1-dev libsodium-dev libnfc-dev libpcsclite-dev publicsuffix
+      - name: Verify native library development files
+        run: |
+          missing=""
+          for tool in cc pkg-config; do
+            command -v "$tool" >/dev/null || missing="$missing $tool"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error title=Missing runner dependencies::$missing" >&2
+            exit 1
+          fi
+          pkg-config --print-errors --exists libudev dbus-1 libsodium libnfc libpcsclite
       - name: Install latest stable toolchain
         run: rustup toolchain install stable --profile minimal -c clippy,rustfmt && rustup default stable
       - name: Clippy
